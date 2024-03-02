@@ -18,6 +18,25 @@ async function convertImage(event) {
     const formData = new FormData();
     formData.append("image", file);
 
+    const acceptableFormat = [
+        "jpeg",
+        "jpg",
+        "jpe",
+        "png",
+        "avif",
+        "tiff",
+        "tif",
+        "webp",
+    ];
+    const isAcceptableFormat = acceptableFormat.some(
+        (el) => el === targetFormat
+    );
+    
+    if (isAcceptableFormat) {
+        alert("the target format not acceptable");
+        return;
+    }
+
     // Send POST request with image and target format
     fetch(`${baseUrl}/processImage/${targetFormat}`, {
         method: "POST",
@@ -35,7 +54,6 @@ async function convertImage(event) {
 
             const blob = await response.blob();
             return blob;
-
         })
         .then(function (blob) {
             const imageUrl = URL.createObjectURL(blob);

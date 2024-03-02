@@ -2,8 +2,6 @@ const sharp = require("sharp");
 const path = require("path");
 const fs = require("fs");
 const {getUnformatedpicsName} = require("./fileHandler");
-const multer = require("multer")
-
 
 /**
  *  Change the format of the picture based on the target format.
@@ -72,12 +70,11 @@ async function changeFormatPic(targetFormat, res) {
             //send the formatted pic as response
             res.sendFile(formattedPicName);
 
-            sharp.cache(false)
             // after half second delete formatted and unformatted picture
             setTimeout(() => {
+                sharp.cache(false)
                 deletePhoto(formattedPicName);
                 deletePhoto(pathUnformattedPic);
-
             }, 100);
         });
 }
