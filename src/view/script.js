@@ -28,11 +28,11 @@ async function convertImage(event) {
         "tif",
         "webp",
     ];
-    const isAcceptableFormat = acceptableFormat.some(
-        (el) => el === targetFormat
-    );
-    
-    if (isAcceptableFormat) {
+    const isAcceptableFormat = acceptableFormat.some((el) => {
+        return el === targetFormat;
+    });
+
+    if (!isAcceptableFormat) {
         alert("the target format not acceptable");
         return;
     }
