@@ -57,8 +57,9 @@ async function convertImage(event) {
         })
         .then(function (blob) {
             const imageUrl = URL.createObjectURL(blob);
+            const filename = `converted.${targetFormat}`;
             downloadLink.href = imageUrl;
-            downloadLink.download = `${imageUrl}`;
+            downloadLink.download = filename;
             downloadLink.style.display = "block";
         })
         .catch(function (error) {
